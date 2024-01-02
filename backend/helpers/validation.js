@@ -4,12 +4,18 @@ exports.validateEmail=(email)=>{
     return String(email).toLocaleLowerCase().match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
     
 };
-exports.validateLength=(text,min,max)=>{
-    if(text.length>max || text.length<min){
-        return false;
-    }
-    return true;
-}
+// exports.validateLength=(text,min,max)=>{
+//     if(text.length>max || text.length<min){
+//         return false;
+//     }
+//     return true;
+// }
+
+
+exports.validateLength = (text, min, max) => {
+  return text.length >= min && text.length <= max;
+};
+
 exports.validateUsername=async(username)=>{
     let a=false;
     do{
