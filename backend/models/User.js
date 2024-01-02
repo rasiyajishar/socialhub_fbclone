@@ -1,6 +1,7 @@
 const { ObjectId, Timestamp } = require("mongodb")
 const mongoose = require("mongoose")
-const{ObjectId}=mongoose.Schema;
+
+
 const userSchema = mongoose.Schema({
     first_name:{
         type:String,
@@ -75,7 +76,7 @@ default:[],
 },
 search:{
     user:{
-        type:ObjectId,                          //mongoose.Schema.ObjectId,
+        type:mongoose.Schema.ObjectId,
         ref:"user",
     }
 },
@@ -98,7 +99,7 @@ savedPosts:[
     {
         post:{
         type:ObjectId,
-        ref:post,
+        // ref:post,
     },
     savedAt:{
         type:Date,
