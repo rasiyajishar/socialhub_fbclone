@@ -215,7 +215,7 @@ exports.login = async (req, res) => {
         const user = await User.findOne({ email });
 
         if (!user) {
-            return res.status(400).json({ message: "Invalid email" });
+            return res.status(400).json({ message: "email you entered is not connected" });
         }
 
         const check = await bcrypt.compare(password, user.password);
@@ -224,7 +224,18 @@ exports.login = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials, please try again" });
         }
 
-        // Your login logic here...
+        const token = generateToken({ id: user._id.toString() }, "7d");
+
+        res.status(201).json({
+            id: user._id,
+            username: user.username,
+            picture: user.picture, // Ensure user.picture is available in your model
+            first_name: user.first_name,
+            last_name: user.last_name,
+            token,
+            verified: user.verified,
+            message: "Registration successful. Please activate your email."
+        });
 
     } catch (error) {
         res.status(500).json({ message: error.message });
