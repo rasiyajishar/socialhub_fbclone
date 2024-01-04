@@ -1,0 +1,78 @@
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #333; 
+    color: #fff; 
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .social-hub {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    margin-right: 2rem;
+  }
+  
+  .search {
+    position: relative;
+  }
+  
+  .search-input {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+  }
+  
+  .header-center {
+    display: flex;
+  }
+  
+  .nav-link {
+    margin-right: 1rem;
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .profile-picture {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+  
+  .user-name {
+    font-weight: bold;
+  }
+  .watchnotification{
+
+position: absolute;
+top:3px;
+
+background: #e41e3f;
+border-radius: 50px;
+padding: 1px 5px;
+font-size: 10px;
+color: white;
+}
