@@ -54,6 +54,16 @@ byear:{
     required:false,
     trim:true,
 },
+bmonth:{
+    type:Number,
+    required:false,
+    trim:true,
+},
+bday:{
+    type:Number,
+    required:false,
+    trim:true,
+},
 verified:{
     type:Boolean,
     default:false,
