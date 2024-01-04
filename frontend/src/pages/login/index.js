@@ -53,8 +53,9 @@ import React from 'react';
 import './style.css';
 import { Formik, Form, Field,ErrorMessage } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
-
+import axios from "axios";
 import { useState } from 'react';
+import { useDispatch } from "react-redux";
 import * as yup from 'yup';
 const loginInfos = {
     email:"",
@@ -62,6 +63,7 @@ password:"",
 };
 function Login() {
     const navigate=useNavigate()
+    const dispatch = useDispatch()
 const[login,setLogin] = useState(loginInfos);
 const{ email,password } = login;
 console.log(login);
@@ -83,6 +85,26 @@ const loginValidation = yup.object({
     navigate('/register')
   }
 
+const[error,setError] = useState("");
+
+const[loading,setLoading] = useState(false)
+
+
+
+const loginSubmit = async()=>{
+  try {
+   const {data} =await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`,{email,password
+  
+  })
+  const {message,...rest} = data;
+  dispatch({type:"LOGIN",payload:rest})
+  navigate("/");
+  } catch (error) {
+    setLoading(false);
+    setError(error.response.data.message);
+  }
+}
+
   return (
     <div className='login'>
       <div className='login_wrapper'>
@@ -101,6 +123,9 @@ const loginValidation = yup.object({
             enableReinitialize
               initialValues={{ email, password }}
              validationSchema={loginValidation}
+             onSubmit={()=>{
+              loginSubmit()
+             }}
             >
               {(formik) => (
                 <Form>
@@ -131,6 +156,7 @@ const loginValidation = yup.object({
             <Link to='/forgot' className='forgot-link'>
               Forgotten password?
             </Link>
+            {error}
             <br />
             <button onClick={createacc} className='createacc'>Create Account</button>
           </div>
