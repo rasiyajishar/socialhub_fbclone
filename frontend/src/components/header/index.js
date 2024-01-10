@@ -91,9 +91,8 @@ export const Header = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = () => {
-    // Implement your search logic here using the searchValue
-    // For demonstration purposes, let's just set some dummy results
-    setSearchResults([`${searchValue}`, `${searchValue}`]);
+   
+    setSearchResults([`${searchValue}`]);
   };
 
   return (
@@ -103,14 +102,17 @@ export const Header = () => {
           socialHUB
         </Link>
         <div className='search'>
+        <IoSearch onClick={handleSearch} />
           <input
             type="text"
+            
             placeholder='Search socialhub...'
             className='search-input'
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
+            
           />
-        <IoSearch onClick={handleSearch} />
+       
         </div>
         {searchResults.length > 0 && <SearchResult results={searchResults} />}
       </div>
