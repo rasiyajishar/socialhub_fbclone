@@ -1,7 +1,7 @@
 
   
 
-.CreatePost {
+/* .CreatePost {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -13,7 +13,8 @@
     margin: 0 auto;
     margin-top: 40px;
   }
-  
+   
+   
   .CreatePost_header {
     display: flex;
     align-items: center;
@@ -64,4 +65,78 @@
     border-radius: 10px;
     font-size: 15px;
   }
-   
+   */
+   .CreatePost {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px;
+    margin-top: 1.1rem;
+    width: 650px; /* Set the same width as postbox for consistency */
+    cursor: pointer;
+    max-width: 100%; /* Allow it to take the full width on smaller screens */
+    margin: 0 auto;
+    margin-top: 40px;
+  }
+  
+  @media (max-width: 768px) {
+    .CreatePost {
+      width: 100%;
+    }
+  }
+  
+  /* .CreatePost_header */
+  .CreatePost_header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 17px 5px 15px;
+  }
+  
+  /* .CreatePost_header img */
+  .CreatePost_header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  /* .open_post */
+  .open_post {
+    height: 41px;
+    font-weight: bold;
+    color: #333;
+    flex: 1;
+    border-radius: 50px;
+    font-size: 17px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* .create_splitter */
+  .create_splitter {
+    height: 1px;
+    width: 95px;
+    margin: 7px 10px;
+  }
+  
+  /* .CreatePost_body */
+  .CreatePost_body {
+    padding: 0 10px 8px 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* .CreatePost_icon */
+  .CreatePost_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    padding: 7px;
+    color: black;
+    border-radius: 10px;
+    font-size: 15px;
+  }

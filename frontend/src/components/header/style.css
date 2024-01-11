@@ -47,12 +47,24 @@
     display: flex;
     align-items: center;
   }
+
+  .arrow_header{
+    cursor: pointer;
+  }
   
   .profile-link {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: #fff;
+      display: flex;
+      padding: 5px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 2px;
+    
   }
   
   .profile-picture {
@@ -64,7 +76,14 @@
   
   .user-name {
     font-weight: bold;
+    color: #ccc;
   }
+
+
+  
+
+
+
   .watchnotification{
 
 position: absolute;
@@ -156,4 +175,29 @@ color: white;
   &:hover {
     background-color: #f0f0f0;
   }
+}
+
+
+/*arrow rightside */
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: 20px; 
+ right: 1px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  z-index: 1;
+  color: rgb(14, 13, 13);
+}
+
+.dropdown-content div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+
+.arrow_header {
+ 
+  cursor: pointer;
 }

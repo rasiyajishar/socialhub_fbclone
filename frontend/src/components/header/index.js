@@ -73,14 +73,15 @@
 
 import React, { useState } from 'react';
 import './style.css';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineComputer } from 'react-icons/md';
 import { FaUserFriends } from 'react-icons/fa';
 import {  IoSearch } from 'react-icons/io5';
 import { AiFillHome } from "react-icons/ai";
+import { FaArrowAltCircleDown } from "react-icons/fa";
 
-
+import Cookies from 'js-cookie';
 
 
 import SearchResult from './searchresult'
@@ -89,11 +90,38 @@ export const Header = () => {
   const { user } = useSelector((state) => ({ ...state.user }));
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [isDropdownVisible, setDropdownVisibility] = useState(false);
+  const dispatch= useDispatch();
+  const navigate = useNavigate()
+
+
 
   const handleSearch = () => {
    
     setSearchResults([`${searchValue}`]);
   };
+
+
+  const handleDropdownToggle = () => {
+    setDropdownVisibility(!isDropdownVisible);
+  };
+  
+  const handleLogout = () => {
+    Cookies.set("user","")
+   dispatch ({
+    type:"LOGOUT",
+
+   })
+   navigate("/login")
+  };
+  
+  const handleSetProfile = () => {
+    navigate("/profile")
+  };
+
+
+
+
 
   return (
     <header className='header'>
@@ -129,10 +157,21 @@ export const Header = () => {
         </Link>
       </div>
       <div className='header-right'>
+
+      
         <Link to="/profile" className='profile-link'>
           <img src={user?.picture} alt='' className='profile-picture' />
           <span className='user-name'>{user?.first_name}</span>
         </Link>
+        <div className='profile-dropdown' onClick={handleDropdownToggle}>
+        <FaArrowAltCircleDown className='arrow_header'/>
+        {isDropdownVisible && (
+    <div className='dropdown-content'>
+      <div onClick={handleSetProfile}>Set Profile</div>
+      <div onClick={handleLogout}>Log Out</div>
+    </div>
+  )}
+     </div> 
       </div>
     </header>
   );

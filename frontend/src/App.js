@@ -5,9 +5,13 @@ import Profile from "./pages/profile";
 import Home from "./pages/home"; 
 import Register from "./pages/register";
 
+import { useSelector } from "react-redux";
+
 function App() {
+  const {user} = useSelector((state)=>({...state}))
   return (
     <div>
+     
       <Routes>
         <Route path="/login" element={<Login />} exact />
         <Route path="/profile" element={<Profile />} exact />

@@ -62,16 +62,25 @@ const loginInfos = {
 password:"",
 };
 function Login() {
+
+
     const navigate=useNavigate()
     const dispatch = useDispatch()
 const[login,setLogin] = useState(loginInfos);
 const{ email,password } = login;
 console.log(login);
+
+
 const handleLoginChange = (e) =>{
 const {name,value} = e.target;
 setLogin({...login,[name]:value})
 }
 
+const googleAuth = ()=>{
+  window.open(
+    `${process.env.REACT_APP_BACKEND_URL}`,"_self"
+  )
+}
 
 const loginValidation = yup.object({
     email: yup.string().required('Email is required').email('must be a valid email'),
@@ -161,7 +170,8 @@ const loginSubmit = async()=>{
             <button onClick={createacc} className='createacc'>Create Account</button>
           </div>
         </div>
-        {/* <div className='register'></div> */}
+        <button className='googlebtn' onClick={googleAuth}><span>Sign in with google</span></button>
+       
       </div>
     </div>
   );
