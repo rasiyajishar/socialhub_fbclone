@@ -111,7 +111,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cookieSession({
     name: "session",
-    keys: ["cyberwolve"],
+     keys: ["cyberkey"],
     maxAge: 24 * 60 * 60 * 1000, 
   })
 );
