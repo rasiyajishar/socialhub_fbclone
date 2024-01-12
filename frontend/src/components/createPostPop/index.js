@@ -4,11 +4,16 @@ import './style.css';
 import { IoMdClose } from "react-icons/io";
 import Picker from "emoji-picker-react";
 import { MdEmojiEmotions } from "react-icons/md";
+import Addtoyourpost from './Addtoyourpost';
+import ImagePreview from './ImagePreview';
+
 function CreatePostPopup({ user }) {
 
 const[text,setText] = useState("")
-const[showprev,setShowprev] = useState(false);
+const[showprev,setShowPrev] = useState(false);
 const[picker,setPicker] = useState(false);
+const [images, setImages] = useState([]);
+console.log(images)
 const textRef=useRef(null)
 const handleemoji=({emoji})=>{
 const ref=textRef.current;
@@ -60,7 +65,12 @@ setText(newtext);
            <MdEmojiEmotions className='emoji_icon_large' onClick={()=>{setPicker((prev)=>!prev)}
 
           }/>
+
+<ImagePreview images={images} setImages={setImages} setShowPrev={setShowPrev} />
+
         </div>
+        <Addtoyourpost setShowPrev={setShowPrev} />
+        <button className='post_submit'>Post</button>
       </div>
     </div>
   );
