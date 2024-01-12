@@ -85,3 +85,23 @@ object-fit: cover;
   font-family: inherit;
   font-size: 24px;
 }
+.post_emojis_wrap{
+   position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 10px 15px;
+
+}
+.emoji_icon_large{
+    width: 30px;
+    cursor: pointer;
+}
+/* .comment_emoji_picker {
+    position: absolute;
+    right: 0;
+    bottom: 2.5rem;
+}
+.comment_emoji_picker_remove{
+    right: 0.7rem; ;
+} */

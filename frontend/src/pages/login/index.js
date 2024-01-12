@@ -100,19 +100,40 @@ const[loading,setLoading] = useState(false)
 
 
 
-const loginSubmit = async()=>{
+
+
+const loginSubmit = async () => {
   try {
-   const {data} =await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`,{email,password
-  
-  })
-  const {message,...rest} = data;
-  dispatch({type:"LOGIN",payload:rest})
-  navigate("/");
+    const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, { email, password });
+
+    if (response.data) {
+      const { message, ...rest } = response.data;
+      dispatch({ type: "LOGIN", payload: rest });
+      navigate("/");
+    } else {
+      // Handle the case where response.data is undefined or not in the expected format
+      console.error("Unexpected response format:", response);
+    }
   } catch (error) {
     setLoading(false);
     setError(error.response.data.message);
   }
-}
+};
+
+
+// const loginSubmit = async()=>{
+//   try {
+//    const {data} =await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`,{email,password
+  
+//   })
+//   const {message,...rest} = data;
+//   dispatch({type:"LOGIN",payload:rest})
+//   navigate("/");
+//   } catch (error) {
+//     setLoading(false);
+//     setError(error.response.data.message);
+//   }
+// }
 
   return (
     <div className='login'>

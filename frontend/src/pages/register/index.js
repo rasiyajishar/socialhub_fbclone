@@ -81,21 +81,22 @@ const navigate = useNavigate();
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState("false");
  const dispatch = useDispatch()
-  const registerSubmit = async () => {
+  const registerSubmit = async (formValues) => {
     try {
       setLoading(true); // Set loading to true before making the API request
   
       const { data } = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/user/register`,
         {
-          first_name,
-          last_name,
-          email,
-          password,
-          byear,
-          bmonth,
-          bday,
-          gender,
+          // first_name,
+          // last_name,
+          // email,
+          // password,
+          // byear,
+          // bmonth,
+          // bday,
+          // gender,
+          ...formValues,
         }
       );
   
@@ -134,9 +135,9 @@ const navigate = useNavigate();
             gender,
           }}
           validationSchema={registerValidation}
-          onSubmit={() => {
+          onSubmit={(values) => {
             let current_date = new Date();
-            let picked_date = new Date(byear, bmonth - 1, bday);
+            let picked_date = new Date(values.byear,values.bmonth - 1, values.bday);
             let atleast14 = new Date(1970 + 14, 0, 1);
 
             let nomorethan70 = new Date(1970 + 70, 0, 1);
@@ -148,12 +149,12 @@ const navigate = useNavigate();
               setDateError(
                 "it looks like you are enrered a wrong date of birth"
               );
-            } else if (gender === "") {
+            } else if (values.gender === "") {
               setGenderError("pls choose a gender");
             } else {
               setDateError("");
               setGenderError("");
-              registerSubmit();
+              registerSubmit(values);
             }
           }}
         >

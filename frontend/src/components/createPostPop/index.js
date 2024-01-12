@@ -1,12 +1,24 @@
-import React ,{useState}  from 'react';
+import React ,{useRef, useState}  from 'react';
 import { MdPublic } from "react-icons/md";
 import './style.css';
 import { IoMdClose } from "react-icons/io";
+import Picker from "emoji-picker-react";
+import { MdEmojiEmotions } from "react-icons/md";
 function CreatePostPopup({ user }) {
 
 const[text,setText] = useState("")
 const[showprev,setShowprev] = useState(false);
+const[picker,setPicker] = useState(false);
+const textRef=useRef(null)
+const handleemoji=({emoji})=>{
+const ref=textRef.current;
+ref.focus();
+const start=text.substring(0,ref.selectionStart);
+const end=text.substring(ref.selectionStart);
+const newtext=start + emoji + end;
+setText(newtext);
 
+};
   return (
     <div className='blur'>
       <div className='postbox'>
@@ -31,14 +43,23 @@ const[showprev,setShowprev] = useState(false);
 
         {!showprev && (
         <div className='flex_center'>
-          <textarea maxLength="100" placeholder='post something....'
+          <textarea 
+          ref={textRef}
+          maxLength="100" placeholder='post something....'
            value={text} className='post_input' onChange={(e)=>setText(e.target.value)
            }></textarea>
             
         </div>
         )}
         <div className='post_emojis_wrap'>
-          <div className='comment_emoji_picker_remove'></div>
+          {picker && (
+            <div className='comment_emoji_picker_remove'>
+            <Picker onEmojiClick={handleemoji}/>
+          </div>
+          )}
+           <MdEmojiEmotions className='emoji_icon_large' onClick={()=>{setPicker((prev)=>!prev)}
+
+          }/>
         </div>
       </div>
     </div>
