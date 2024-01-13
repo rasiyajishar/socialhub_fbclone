@@ -100,11 +100,19 @@ const app = express();
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 const cors = require("cors");
+const fileUpload = require('express-fileupload');
+
 const dotenv = require("dotenv").config();
 const passportSetup = require("./passport");
 const userRoutes = require("./routes/user");
+const postRoutes = require("./routes/post")
 
 app.use(cors());
+app.use(
+  fileUpload({
+    useTempFiles:true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -120,6 +128,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/user", userRoutes); 
+app.use("/post", postRoutes); 
 
 mongoose
   .connect(process.env.MONGODB_URI, {

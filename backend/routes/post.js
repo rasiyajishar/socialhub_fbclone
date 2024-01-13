@@ -1,9 +1,20 @@
+// const express = require("express");
+// const {createPost }=require("../controllers/post")
+
+//     const {authuser}=require("../middlewares/auth");
+
+//     const router = express.Router();
+//     router.post("/createPost",authuser,createPost);
+
+//     module.exports = router;
+
 const express = require("express");
-const {createPost }=require("../controllers/post")
+const { createPost } = require("../controllers/post");
+const { authuser } = require("../middlewares/auth");
 
-    const {authuser}=require("../middlewares/auth");
+const router = express.Router();
 
-    const router = express.Router();
-    router.post("/createPost",authuser,createPost);
+// Updated route path without "user/"
+router.post("/createPost", authuser, createPost);
 
-    module.exports = router;
+module.exports = router;
