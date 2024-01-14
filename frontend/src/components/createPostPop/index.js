@@ -39,7 +39,7 @@ function CreatePostPopup({ user, setVisible }) {
     // Check if 'user' is defined and has an 'id' property
     if (user && user.id) {
         try {
-            const res = await createPost(text, null, user.id, user.token);
+            const res = await createPost(null,text, null, user.id, user.token);
             // Check if 'res' is defined before accessing its properties
             if (res) {
                 // Handle the response as needed
