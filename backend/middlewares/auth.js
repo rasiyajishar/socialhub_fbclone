@@ -2,10 +2,10 @@ const jwt = require("jsonwebtoken")
 
 exports.authuser=async(req,res,next)=>{
     try {
-      let temp =req.header("authorization")
+      const temp =req.header("authorization")
       const token  = temp ? temp.slice(7,temp.length) : ""
-      if(token){
-        return res.status(400).json({message:"invalid aaaaaaaaaaauthentication"})
+      if(!token){
+        return res.status(400).json({message:"token is missing"})
       }
 
       jwt.verify(token,process.env.TOKEN_SECRET,(err,user)=>{
