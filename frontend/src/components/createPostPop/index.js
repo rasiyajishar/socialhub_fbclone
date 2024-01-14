@@ -7,6 +7,7 @@ import { MdEmojiEmotions } from 'react-icons/md';
 import Addtoyourpost from './Addtoyourpost';
 import ImagePreview from './ImagePreview';
 import { createPost } from '../../functions/post';
+import  PulseLoader from "react-spinners/PulseLoader"
 
 function CreatePostPopup({ user, setVisible }) {
   const popup=useRef(null)
@@ -39,6 +40,8 @@ function CreatePostPopup({ user, setVisible }) {
     // Check if 'user' is defined and has an 'id' property
     if (user && user.id) {
         try {
+
+          console.log("Token:", user.token);
             const res = await createPost(null,text, null, user.id, user.token);
             // Check if 'res' is defined before accessing its properties
             if (res) {
@@ -57,6 +60,7 @@ function CreatePostPopup({ user, setVisible }) {
 
     setLoading(false);
     setText("");
+    setVisible(false)
 };
 
   
@@ -111,9 +115,18 @@ function CreatePostPopup({ user, setVisible }) {
           <ImagePreview images={images} setImages={setImages} setShowPrev={setShowPrev} />
         </div>
         <Addtoyourpost setShowPrev={setShowPrev} />
-        <button className="post_submit" onClick={
-          postSubmit
-        }>Post</button>
+        <button className="post_submit" onClick={()=>{
+ postSubmit()
+        }
+         
+        }
+        disabled={loading}
+        >
+        {loading ? <PulseLoader color='#fff' size={5}/> :"Post"}
+        
+        Post
+        
+        </button>
       </div>
     </div>
   );
