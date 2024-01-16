@@ -23,6 +23,6 @@ router.use(fileUpload());
 
 
 router.post("/createPost", authuser, createPost);
-router.get("/getAllPosts", getAllPosts);
+router.get("/getAllPosts",authuser, getAllPosts);
 
 module.exports = router;
