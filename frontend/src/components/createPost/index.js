@@ -83,3 +83,4 @@ const CreatePost = ({ user, visible, setVisible }) => {
 };
 
 export default CreatePost;
+
