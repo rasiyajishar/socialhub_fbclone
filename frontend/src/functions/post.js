@@ -13,7 +13,7 @@ export const createPost=async(
             },
           }
         );
-        return data;
+        return "ok";
     } catch (error) {
         console.error("Error in createPost:", error);
         throw error.response.data.message; 

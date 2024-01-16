@@ -8,6 +8,7 @@ import Addtoyourpost from './Addtoyourpost';
 import ImagePreview from './ImagePreview';
 import { createPost } from '../../functions/post';
 import  PulseLoader from "react-spinners/PulseLoader"
+import { uploadImages } from '../../functions/uploadImages';
 
 function CreatePostPopup({ user, setVisible }) {
   const popup=useRef(null)
@@ -15,6 +16,7 @@ function CreatePostPopup({ user, setVisible }) {
   const [showprev, setShowPrev] = useState(false);
   const [picker, setPicker] = useState(false);
   const [images, setImages] = useState([]);
+  const[error,setError] = useState("")
  const[loading,setLoading] = useState(false)
   console.log(images);
   const textRef = useRef(null);
@@ -34,34 +36,169 @@ function CreatePostPopup({ user, setVisible }) {
   };
 
 
-  const postSubmit = async () => {
-    setLoading(true);
+//   const postSubmit = async () => {
+//     setLoading(true);
 
-    // Check if 'user' is defined and has an 'id' property
-    if (user && user.id) {
-        try {
+//     let res; // Declare 'res' outside the try-catch block
 
-          console.log("Token:", user.token);
-            const res = await createPost(null,text, null, user.id, user.token);
-            // Check if 'res' is defined before accessing its properties
-            if (res) {
-                // Handle the response as needed
-            } else {
-                console.error("createPost response is undefined");
-            }
-        } catch (error) {
-            console.error("Error in postSubmit:", error);
-            // Handle the error as needed
-        }
-    } else {
-        // Handle the case where 'user' or 'user.id' is undefined
-        console.error("User or user.id is undefined");
+//     // Check if 'user' is defined and has an 'id' property
+//     if (user && user.id) {
+//         try {
+//             console.log("Token:", user.token);
+//             res = await createPost(null, text, null, user.id, user.token);
+
+//             // Check if 'res' is defined before accessing its properties
+//             if (res) {
+//                 // Handle the response as needed
+//             } else {
+//                 console.error("createPost response is undefined");
+//             }
+//         } catch (error) {
+//             console.error("Error in postSubmit:", error);
+//             // Handle the error as needed
+//         }
+//     } else {
+//         // Handle the case where 'user' or 'user.id' is undefined
+//         console.error("User or user.id is undefined");
+//     }
+
+//     setLoading(false);
+
+//     if (res === "ok") {
+//         setText("");
+//         setVisible(false);
+//     } else {
+//         setError(res);
+
+//         if (images && images.length) {
+//             // Handle the case when there are images
+//             setLoading(true);
+//             const postImages = images.map((img)=>{
+//               return postImages;
+//             })
+//             const path = `${user.username}/post Images`;
+//             let formData = new FormData();
+//             formData.append("path",path);
+//             postImages.forEach((image)=>{
+//               formData.append("file",image)
+
+//             });
+//             const response=await uploadImages(formData,path,user.token)
+//            await createPost(null,null,text,response,user.id,user.token)
+//            setLoading(false)
+//            setText("") ;
+//            setImages("") 
+//            setVisible(false)         
+//             console.log(response)
+//         } else if (text) {
+
+// setLoading(true)
+// const response = await createPost(null,text,null,user.id,user.token)
+
+// setLoading(false)
+// if(response === "ok"){
+//   setText("")
+//   setVisible(false)
+
+// }
+// else{
+//   setError(response)
+// }
+
+//             // Handle the case when there is text
+//             console.log("Text exists");
+//         } else {
+//             // Handle the case when there is neither text nor images
+//             console.log("Nothing");
+//         }
+//     }
+// };
+
+
+const postSubmit = async () => {
+  setLoading(true);
+
+  let res;
+
+  if (user && user.id) {
+    try {
+      console.log("Token:", user.token);
+
+
+      console.log('Request Payload:', { type: null, text, images, user: user.id });
+      res = await createPost(null, text, images, user.id, user.token);
+
+
+      console.log('API Response:', res); // Log the API response
+
+      if (!res) {
+        console.error("createPost response is undefined");
+      }
+    } catch (error) {
+      console.error("Error in postSubmit:", error);
     }
+  } else {
+    console.error("User or user.id is undefined");
+  }
 
-    setLoading(false);
+  setLoading(false);
+
+  if (res === "ok") {
     setText("");
-    setVisible(false)
+    setVisible(false);
+  } else {
+    setError(res);
+
+    if (images && images.length) {
+      setLoading(true);
+      const path = `${user.username}/post Images`;
+      let formData = new FormData();
+
+      // Map over the images correctly
+      images.forEach((image) => {
+        formData.append("file", image);
+      });
+
+      formData.append("path", path);
+
+      try {
+        const response = await uploadImages(formData, path, user.token);
+        // Assuming that response contains the image URLs
+        const imageUrls = response.map((image) => image.url);
+
+        await createPost(null, text, imageUrls, user.id, user.token);
+        setLoading(false);
+        setText("");
+        // Clear the images array
+        setImages([]);
+        setVisible(false);
+        console.log(response);
+      } catch (uploadError) {
+        console.error("Error uploading images:", uploadError);
+        setLoading(false);
+        // Handle the upload error as needed
+      }
+    } else if (text) {
+      setLoading(true);
+
+      const response = await createPost(null, text, null, user.id, user.token);
+
+      setLoading(false);
+
+      if (response === "ok") {
+        setText("");
+        setVisible(false);
+      } else {
+        setError(response);
+      }
+
+      console.log("Text exists");
+    } else {
+      console.log("Nothing");
+    }
+  }
 };
+
 
   
   return (
@@ -124,7 +261,7 @@ function CreatePostPopup({ user, setVisible }) {
         >
         {loading ? <PulseLoader color='#fff' size={5}/> :"Post"}
         
-        Post
+        
         
         </button>
       </div>

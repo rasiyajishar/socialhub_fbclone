@@ -21,7 +21,12 @@ function ImagePreview({images,setImages,setShowPrev}) {
 
   return (
     <div className='add_pic_wrap'>
-      <input type='file' multiple hidden ref={ImageInputRef} onChange={handleImage} />
+      <input type='file'
+      accept='image/jpeg,image/png,image/webp,image/gif'
+       multiple 
+       hidden 
+       ref={ImageInputRef} 
+       onChange={handleImage} />
       {images && images.length ? (
         <div className='add_pic_inside1 p0'>
           <div className='preview_actions'>
