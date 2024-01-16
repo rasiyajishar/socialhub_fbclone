@@ -43,17 +43,16 @@ function App() {
   });
 
   useEffect(() => {
+    console.log("Fetching posts...");
     getAllPosts();
   }, []);
-
+  
 
 
 
   const getAllPosts = async () => {
     try {
-      dispatch({
-        type: "POST_REQUEST"
-      });
+      dispatch({ type: "POST_REQUEST" });
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/post/getAllPosts`,
         {
@@ -62,6 +61,8 @@ function App() {
           }
         }
       );
+  
+      console.log("API Response:", response);
   
       if (response && response.data) {
         dispatch({
@@ -75,12 +76,15 @@ function App() {
         });
       }
     } catch (error) {
+      console.error("Error in API call:", error);
       dispatch({
         type: "POST_ERROR",
         payload: error.response ? error.response.data.message : "Network error"
       });
     }
   };
+  
+  
   console.log(posts);
 
  
@@ -91,6 +95,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} exact />
         <Route path="/profile" element={<Profile />} exact />
+        {/* Check if posts array is not empty before rendering Home */}
         <Route path="/" element={<Home setVisible={setVisible} posts={posts} />} exact />
         <Route path="/register" element={<Register />} exact />
       </Routes>

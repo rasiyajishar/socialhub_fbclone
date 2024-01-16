@@ -39,8 +39,8 @@ import Lefthome from '../../components/home/left';
 import CreatePost from '../../components/createPost';
 import CreatePostPopup from '../../components/createPostPop';
 import { useSelector } from 'react-redux';
-
-const Home = ({ visible, setVisible, posts }) => {
+import Post from "../../components/post"
+const Home = ({ visible, setVisible, posts ,loading}) => {
   const { user } = useSelector((state) => ({ user: state.user }));
 
   return (
@@ -48,17 +48,19 @@ const Home = ({ visible, setVisible, posts }) => {
       <Header />
       <Lefthome user={user} />
       <CreatePost user={user} setVisible={setVisible} />
-      {visible && <CreatePostPopup user={user} setVisible={setVisible} />}
 
-      {posts.length ? (
-        posts.map((post) => (
-          <div className='post' key={post._id}>
-            {post._id}
-          </div>
-        ))
-      ) : (
-        <div>Loading...</div>
-      )}
+      {loading ? (
+  <div>Loading...</div>
+) : (
+  <div className='posts'>
+    {posts.map((post) => (
+      <Post key={post._id} post={post} />
+    ))}
+  </div>
+)}
+
+
+      {visible && <CreatePostPopup user={user} setVisible={setVisible} />}
     </div>
   );
 };
