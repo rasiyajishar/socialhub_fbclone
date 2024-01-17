@@ -6,8 +6,7 @@ import Home from "./pages/home";
 import Register from "./pages/register";
 
 import { useSelector } from "react-redux";
-import axios from "axios"; // Import axios
-
+import axios from "axios";
 import CreatePostPopup from "./components/createPostPop";
 
 function reDucer(state, action) {
@@ -15,6 +14,7 @@ function reDucer(state, action) {
     case "POST_REQUEST":
       return { ...state, loading: true, error: "" };
     case "POST_SUCCESS":
+      console.log("API Response Data:", action.payload);
       return {
         ...state,
         loading: false,
@@ -33,7 +33,6 @@ function reDucer(state, action) {
 }
 
 function App() {
-  //createpostvisible
   const [visible, setVisible] = useState(false);
   const { user } = useSelector((state) => ({ ...state }));
   const [{ loading, error, posts }, dispatch] = useReducer(reDucer, {
@@ -43,16 +42,17 @@ function App() {
   });
 
   useEffect(() => {
-    console.log("Fetching posts...");
-    getAllPosts();
-  }, []);
+    console.log("User Object:", user);
+    if (user && user.token) {
+      getAllPosts();
+    }
+  }, [user]);
   
-
-
 
   const getAllPosts = async () => {
     try {
       dispatch({ type: "POST_REQUEST" });
+      console.log("User:", user);
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/post/getAllPosts`,
         {
@@ -61,15 +61,16 @@ function App() {
           }
         }
       );
-  
+
       console.log("API Response:", response);
-  
+
       if (response && response.data) {
         dispatch({
           type: "POST_SUCCESS",
           payload: response.data
         });
       } else {
+        console.log("Data not available");
         dispatch({
           type: "POST_ERROR",
           payload: "Data not available"
@@ -77,17 +78,17 @@ function App() {
       }
     } catch (error) {
       console.error("Error in API call:", error);
+      console.error("Server response:", error.response);
       dispatch({
         type: "POST_ERROR",
-        payload: error.response ? error.response.data.message : "Network error"
+        payload: error.response
+          ? error.response.data.message || "Server error"
+          : "Network error"
       });
     }
   };
-  
-  
-  console.log(posts);
 
- 
+  console.log(posts);
 
   return (
     <div>
@@ -95,8 +96,11 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} exact />
         <Route path="/profile" element={<Profile />} exact />
-        {/* Check if posts array is not empty before rendering Home */}
-        <Route path="/" element={<Home setVisible={setVisible} posts={posts} />} exact />
+        <Route
+          path="/"
+          element={<Home setVisible={setVisible} posts={posts} />}
+          exact
+        />
         <Route path="/register" element={<Register />} exact />
       </Routes>
     </div>

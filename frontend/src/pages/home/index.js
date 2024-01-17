@@ -41,6 +41,9 @@ import CreatePostPopup from '../../components/createPostPop';
 import { useSelector } from 'react-redux';
 import Post from "../../components/post"
 const Home = ({ visible, setVisible, posts ,loading}) => {
+  
+  console.log("Posts before rendering:", posts);
+  
   const { user } = useSelector((state) => ({ user: state.user }));
 
   return (
