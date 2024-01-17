@@ -10,12 +10,12 @@
     box-shadow: 0 1px 2px ;
     color:black;
     width:650px;
-    left: 330px;
+    left: 325px;
 }
 
 /* @media (max-width:768px) {
     .post{
-      width: 100%;
+      width:100%;
     }
   } */
 
@@ -65,4 +65,85 @@
 
 .post_text{
 
+}
+.imagediv{
+  object-fit: cover;
+}
+.post_infos{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+.react_count{
+  display:flex;
+  align-items: center;
+  gap:5px;
+}
+.react_count_imgs{
+  display:flex;
+  align-items: center;
+  gap: 1px;
+}
+.react_count_imgs img{
+  width: 10px;
+}
+.react_count_num{
+  font-size: 14px;
+  color: rgb(94, 81, 81);
+}
+.toroght{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgb(109, 97, 97);
+  font-size: 15px;
+ 
+}
+.comment_count:hover,.share_count:hover{
+cursor: pointer;
+/* text-decoration: underline; */
+}
+.post_actions{
+  position: relative;
+  display: grid;
+  grid-template-columns:repeat(3,1fr) ;
+  padding: 0 8px 5px 8px;
+  border-top:1px solid rgb(141, 127, 127);
+  margin: 0 10px;
+  padding:5px 0 ;
+}
+.post_action{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:10px;
+  cursor: pointer;
+  padding:7px 0;
+  border-radius: 5px;
+}
+
+.reactpopup{
+display: flex;
+align-items: center;
+top:-3.4rem;
+right: 50px;
+position: absolute;
+padding:5px 15px;
+border-radius: 50px;
+gap:8px;
+box-shadow:0 1px 2px ;
+}
+.react{
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.react:hover{
+  transform: scale(1.3);
+}
+.react img{
+  width:42px;
+  height: 42px;
+  object-fit: cover;
 }

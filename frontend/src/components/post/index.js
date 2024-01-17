@@ -1,9 +1,13 @@
-import React  from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import Moment from "react-moment";
 import { MdOutlinePublic } from "react-icons/md";
 import { BsThreeDots } from "react-icons/bs";
+import { AiFillLike } from "react-icons/ai";
+import { FaCommentAlt } from "react-icons/fa";
+import { FaShare } from "react-icons/fa6";
+import Reactpopup from "./reactpop";
 
 function Post({ post }) {
   console.log("Post Data:", post);
@@ -31,26 +35,52 @@ function Post({ post }) {
             </div>
 
             <div className="post_profile_date">
-            <MdOutlinePublic />
-              <Moment fromNow inteval={30}>{post.createdAt}</Moment>
-              
+              <MdOutlinePublic />
+              <Moment fromNow inteval={30}>
+                {post.createdAt}
+              </Moment>
             </div>
           </div>
         </Link>
         <div className="post_header_right hover1">
-        <BsThreeDots />
+          <BsThreeDots />
         </div>
       </div>
-<div className="post_text">{post.text}</div>
-{post.images && post.images.length && <div>
-  {
-    post.images.map((image,i)=>(
-      <img src={image} key={i} alt="" />
-    ))
-  }
-  
-  </div>}
+      <div className="post_text">{post.text}</div>
+      {post.images && post.images.length && (
+        <div>
+          {post.images.map((image, i) => (
+            <img src={image} key={i} alt="" className="imagediv" />
+          ))}
+        </div>
+      )}
 
+      <div className="post_infos">
+        <div className="react_count_imgs">
+          <div>
+            <div className="react_count_num"></div>
+          </div>
+          <div className="toroght">
+            <div className="comment_count">14comment</div>
+            <div className="share_count">2 share</div>
+          </div>
+        </div>
+      </div>
+      <div className="post_actions">
+        <Reactpopup />
+        <div className="post_action">
+        <AiFillLike />
+        <span>Like</span>
+        </div>
+        <div className="post_action">
+        <FaCommentAlt />
+        <span>Comment</span>
+        </div>
+        <div className="post_action">
+        <FaShare />
+        <span>Share</span>
+        </div>
+      </div>
     </div>
   );
 }
