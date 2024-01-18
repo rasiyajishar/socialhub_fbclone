@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState}from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import Moment from "react-moment";
@@ -8,8 +8,10 @@ import { AiFillLike } from "react-icons/ai";
 import { FaCommentAlt } from "react-icons/fa";
 import { FaShare } from "react-icons/fa6";
 import Reactpopup from "./reactpop";
+import CreateComment from "./CreateComment";
 
-function Post({ post }) {
+function Post({ post,user }) {
+  const [visible,setVisible]=useState(false)
   console.log("Post Data:", post);
   return (
     <div className="post">
@@ -67,8 +69,18 @@ function Post({ post }) {
         </div>
       </div>
       <div className="post_actions">
-        <Reactpopup />
-        <div className="post_action">
+        <Reactpopup visible={visible} setVisible={setVisible}/>
+        <div className="post_action " onMouseOver={()=>{
+         setTimeout(()=>{
+          setVisible(true);
+         },500)
+          }}
+          onMouseLeave={()=>{
+            setTimeout(()=>{
+              setVisible(false);
+             },500)
+          }}
+          >
         <AiFillLike />
         <span>Like</span>
         </div>
@@ -80,6 +92,11 @@ function Post({ post }) {
         <FaShare />
         <span>Share</span>
         </div>
+      </div>
+
+      <div className="comments_wrap">
+        <div className="comments_order"></div>
+        <CreateComment user ={user} />
       </div>
     </div>
   );

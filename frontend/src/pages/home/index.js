@@ -57,7 +57,7 @@ const Home = ({ visible, setVisible, posts ,loading}) => {
 ) : (
   <div className='posts'>
     {posts.map((post) => (
-      <Post key={post._id} post={post} />
+      <Post key={post._id} post={post} user={user} />
     ))}
   </div>
 )}

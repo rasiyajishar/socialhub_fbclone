@@ -9,8 +9,9 @@
     border-radius: 10px;
     box-shadow: 0 1px 2px ;
     color:black;
-    width:650px;
-    left: 325px;
+    width: 650px;
+  
+    margin-left: 350px;
 }
 
 /* @media (max-width:768px) {
@@ -128,12 +129,13 @@ cursor: pointer;
 display: flex;
 align-items: center;
 top:-3.4rem;
-right: 50px;
+
 position: absolute;
 padding:5px 15px;
 border-radius: 50px;
 gap:8px;
 box-shadow:0 1px 2px ;
+display: flex;
 }
 .react{
   cursor: pointer;
@@ -146,4 +148,58 @@ box-shadow:0 1px 2px ;
   width:42px;
   height: 42px;
   object-fit: cover;
+}
+
+/*post comment*/
+.comments_wrap{
+  padding: 10px 15px;
+
+}
+
+.create_comment{
+display: flex;
+align-items: center;
+gap:1px;
+}
+
+.create_comment img{
+  width:35px;
+  height: 35px;
+  object-fit: cover;
+}
+
+.comment_input_wrap{
+position :relative;
+width:100% ;
+height: 100%;
+display: flex;
+align-items: center;
+background-color: rgba(212, 210, 210, 0.349);
+border-radius: 50px;
+padding-right: 10px;
+}
+.comment_input_wrap input{
+  outline: none;
+  border: none;
+  flex: 1;
+  /*flex: 1;, it is equivalent to setting flex-grow: 1;, flex-shrink: 1;, and flex-basis: 0%;. This means the item can grow and shrink as needed, and it*/
+height: 35px;
+padding: 0 10px;
+color: black;
+background: transparent;
+}
+.comment_circle_icon{
+  height: 30px;
+  width: 30px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  
+
+}
+
+.comment_emoji_picker{
+  position: absolute;
+  right: 0;
+  bottom: 2.5rem;
 }
