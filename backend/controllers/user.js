@@ -243,3 +243,33 @@ exports.login = async (req, res) => {
 };
 
 
+exports.googleAuthLogin=async(req,res)=>{
+
+    const {email, displayName}=req.body 
+    console.log(req.body)
+  try {  
+    const existUser=await userdatabase.findOne({email:email})
+    if(existUser){
+      const Token=jwt.sign({email:existUser.email},process.env.USER_ACCES_TOKEN_SECRET,
+      { expiresIn:8500})
+        res.status(201).json({
+          status:"success",
+          message:"Login success",
+          data:Token,
+          userid:existUser
+        })
+    }
+    if(!existUser){
+      const user=new UserSchema({username: displayName,email:email})
+      await user.save()
+      const Token=jwt.sign({email:existUser.email},process.env.USER_ACCES_TOKEN_SECRET,
+        { expiresIn:8500})
+    const ExistUser=await userdatabase.findOne({email:email})
+  
+      res.status(203).json({message:'user Loggined successfully', data:Token, 
+      userid:ExistUser})
+    }
+  } catch (error) {
+    console.log(error) 
+  }
+  }

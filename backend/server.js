@@ -116,13 +116,19 @@ app.use(
 app.use(express.json({limit:'50mb'}));
 app.use(express.urlencoded({limit: '50mb', extended: true }));
 
-app.use(
-  cookieSession({
-    name: "session",
-     keys: ["cyberkey"],
-    maxAge: 24 * 60 * 60 * 1000, 
-  })
-);
+// app.use(
+//   cookieSession({
+//     name: "session",
+//      keys: ["cyberkey"],
+//     maxAge: 24 * 60 * 60 * 1000, 
+//   })
+// );
+
+
+
+
+
+
 
 app.use(passport.initialize());
 app.use(passport.session());

@@ -57,7 +57,7 @@
 
 
 const express = require("express");
-const { register, login, activateAccount } = require("../controllers/user");
+const { register, login, activateAccount,googleAuthLogin} = require("../controllers/user");
 const router = express.Router();
 const passport = require("passport");
 
@@ -73,22 +73,25 @@ router.get("/login/success", isAuthenticated, (req, res) => {
   });
 });
 
-router.get("/login/failed", (req, res) => {
-  res.status(401).json({
-    error: true,
-    message: "Log in failure",
-  });
-});
+// router.get("/login/failed", (req, res) => {
+//   res.status(401).json({
+//     error: true,
+//     message: "Log in failure",
+//   });
+// });
 
-router.get(
-  "/google/callback",
-  passport.authenticate("google", {
-    successRedirect: process.env.BASE_URL,
-    failureRedirect: "/user/login/failed",
-  })
-);
+// router.get(
+//   "/google/callback",
+//   passport.authenticate("google", {
+//     successRedirect: process.env.BASE_URL,
+//     failureRedirect: "/user/login/failed",
+//   })
+// );
 
-router.get("/google", passport.authenticate("google", ["profile", "email"]));
+// router.get("/google", passport.authenticate("google", ["profile", "email"]));
+
+//googlefirebase-route
+router.post("/googleauth",googleAuthLogin)
 
 router.get("/logout", (req, res) => {
   req.logout();
