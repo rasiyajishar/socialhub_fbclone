@@ -19,16 +19,16 @@ function CreateComment({ user }) {
   };
 
   const handleimage=(e)=>{
-    let file=e.target.files[0];
-    if(file.type !== 'image/jpeg'&& file.type !=='image/png'){
-       setError(`{filename} format not supported`)
-        return ;
-    }
-    const reader =new FileReader();
-    reader.readAsDataURL(file)
-    reader.onload=(event)=>{
-setCommentImage(event.target.result)
-    }
+//     let file=e.target.files[0];
+//     if(file.type !== 'image/jpeg'&& file.type !=='image/png'){
+//        setError(`{filename} format not supported`)
+//         return ;
+//     }
+//     const reader =new FileReader();
+//     reader.readAsDataURL(file)
+//     reader.onload=(event)=>{
+// setCommentImage(event.target.result)
+  //  }
   }
   return (
     <div className="create_comments_wrap">
