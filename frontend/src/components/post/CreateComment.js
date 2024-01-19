@@ -19,16 +19,23 @@ function CreateComment({ user }) {
   };
 
   const handleimage=(e)=>{
-//     let file=e.target.files[0];
-//     if(file.type !== 'image/jpeg'&& file.type !=='image/png'){
-//        setError(`{filename} format not supported`)
-//         return ;
-//     }
-//     const reader =new FileReader();
-//     reader.readAsDataURL(file)
-//     reader.onload=(event)=>{
-// setCommentImage(event.target.result)
-  //  }
+    let file=e.target.files[0];
+    if(file.type !== 'image/jpeg'&& file.type !=='image/png'&& file.type !=='image/webp'&& file.type !=='image/gif'){
+    
+       setError(`${file.name} format not supported`)
+        return ;
+    }else if(file.size > 1024 *1024 * 5){
+      setError(`${file.name} is too large max 5mb allowed`);
+      return;
+    }
+
+
+
+    const reader =new FileReader();
+    reader.readAsDataURL(file)
+    reader.onload=(event)=>{
+setCommentImage(event.target.result)
+   }
   }
   return (
     <div className="create_comments_wrap">
@@ -43,6 +50,12 @@ function CreateComment({ user }) {
           <input type="file" hidden ref={imgInput} accept="image/jpeg,image/png,image/gif,image/webp"
           onChange={handleimage}
           />
+          {error && (
+            <div className="posterror comment_error">
+            <div className="posterror">{error}</div>
+            <button className="blue_btn" onClick={()=>setError("")}>Try again</button>
+            </div>
+          )}
           <input
             type="text"
             ref={textRef}

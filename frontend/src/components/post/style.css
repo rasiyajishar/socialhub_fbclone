@@ -203,3 +203,8 @@ background: transparent;
   right: 0;
   bottom: 2.5rem;
 }
+
+.comment_error{
+  padding: 0;
+  opacity:1;
+}
