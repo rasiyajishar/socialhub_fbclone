@@ -192,20 +192,47 @@ exports.register = async (req, res) => {
 };
 
 
-exports.activateAccount = async(req,res)=>{
-    const {token} = req.body;
-    console.log(token);
-    const user = jwt.verify(token,process.env.TOKEN_SECRET)
-console.log(user);
-const check = await user.findById(user._id)
-if(check.verified ==true){
-    return res.status(400).json({message:"this email is already activated"})
-}else{
-   await User.findByIdAndUpdate(user.id,{verified:true})
-   return res.status(200).json({message:"account has been activated successfully"})
-}
-}
+// exports.activateAccount = async(req,res)=>{
+//     const {token} = req.body;
+//     console.log(token);
+//     const user = jwt.verify(token,process.env.TOKEN_SECRET)
+// console.log(user);
+// const check = await user.findById(user._id)
+// if(check.verified ==true){
+//     return res.status(400).json({message:"this email is already activated"})
+// }else{
+//    await User.findByIdAndUpdate(user.id,{verified:true})
+//    return res.status(200).json({message:"account has been activated successfully"})
+// }
+// }
 
+
+
+
+exports.activateAccount = async (req, res) => {
+    try {
+        const { token } = req.body;
+        console.log(token);
+        const user = jwt.verify(token, process.env.TOKEN_SECRET);
+        console.log(user);
+
+        const existingUser = await User.findById(user._id);
+
+        if (!existingUser) {
+            return res.status(400).json({ message: "User not found" });
+        }
+
+        if (existingUser.verified) {
+            return res.status(400).json({ message: "This email is already activated" });
+        } else {
+            await User.findByIdAndUpdate(existingUser._id, { verified: true });
+            return res.status(200).json({ message: "Account has been activated successfully" });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
 
 
 
@@ -248,7 +275,7 @@ exports.googleAuthLogin=async(req,res)=>{
     const {email, displayName}=req.body 
     console.log(req.body)
   try {  
-    const existUser=await userdatabase.findOne({email:email})
+    const existUser=await User.findOne({email:email})
     if(existUser){
       const Token=jwt.sign({email:existUser.email},process.env.USER_ACCES_TOKEN_SECRET,
       { expiresIn:8500})
@@ -260,7 +287,7 @@ exports.googleAuthLogin=async(req,res)=>{
         })
     }
     if(!existUser){
-      const user=new UserSchema({username: displayName,email:email})
+      const user=new User({username: displayName,email:email})
       await user.save()
       const Token=jwt.sign({email:existUser.email},process.env.USER_ACCES_TOKEN_SECRET,
         { expiresIn:8500})

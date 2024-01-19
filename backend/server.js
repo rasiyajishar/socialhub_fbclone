@@ -130,8 +130,8 @@ app.use(express.urlencoded({limit: '50mb', extended: true }));
 
 
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.use("/user", userRoutes); 
 app.use("/post", postRoutes); 

@@ -57,7 +57,7 @@
 
 
 const express = require("express");
-const { register, login, activateAccount,googleAuthLogin} = require("../controllers/user");
+const { register, login,activateAccount,googleAuthLogin} = require("../controllers/user");
 const router = express.Router();
 const passport = require("passport");
 
@@ -73,12 +73,12 @@ router.get("/login/success", isAuthenticated, (req, res) => {
   });
 });
 
-// router.get("/login/failed", (req, res) => {
-//   res.status(401).json({
-//     error: true,
-//     message: "Log in failure",
-//   });
-// });
+router.get("/login/failed", (req, res) => {
+  res.status(401).json({
+    error: true,
+    message: "Log in failure",
+  });
+});
 
 // router.get(
 //   "/google/callback",
