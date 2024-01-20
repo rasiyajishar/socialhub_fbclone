@@ -2,10 +2,11 @@ import React, { useRef, useState } from "react";
 import Picker from "emoji-picker-react";
 import { BsEmojiSmile } from "react-icons/bs";
 import { CiCamera } from "react-icons/ci";
+import { IoMdClose } from "react-icons/io";
 function CreateComment({ user }) {
   const [picker, setPicker] = useState(false);
   const [text, setText] = useState("");
-  const[commentimage,setCommentImage]=useState("")
+  const[commentImage,setCommentImage]=useState("")
   const[error,setError]=useState("")
   const textRef = useRef(null);
   const imgInput = useRef(null)
@@ -91,6 +92,15 @@ setCommentImage(event.target.result)
           </div>
         </div>
       </div>
+
+      {commentImage && <div className="comment_image_prevw">
+      <div className="exit_icon" onClick={()=>
+      setCommentImage("")
+      } ><IoMdClose /></div>
+        <img src={commentImage} alt=""/>
+       
+      </div>
+      }
     </div>
   );
 }

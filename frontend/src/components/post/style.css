@@ -217,3 +217,21 @@ background: transparent;
   padding: 0;
   opacity:1;
 }
+.comment_image_prevw{
+  position: relative;
+  margin-top: 5px;
+  margin-left: 40px;
+  width: 160px;
+}
+.comment_image_prevw img{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+
+}
+.exit_icon{
+  top: 0;
+  right: 0;
+  transform: scale(0.8);
+}
