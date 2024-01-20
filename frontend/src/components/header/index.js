@@ -126,7 +126,8 @@ export const Header = () => {
   return (
     <header className='header'>
       <div className='header-left'>
-        <Link to="/" className='social-hub'>
+        
+        <Link to="/" className='social-hub' >
           socialHUB
         </Link>
         <div className='search'>

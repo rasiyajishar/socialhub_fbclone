@@ -36,83 +36,6 @@ function CreatePostPopup({ user, setVisible }) {
   };
 
 
-//   const postSubmit = async () => {
-//     setLoading(true);
-
-//     let res; // Declare 'res' outside the try-catch block
-
-//     // Check if 'user' is defined and has an 'id' property
-//     if (user && user.id) {
-//         try {
-//             console.log("Token:", user.token);
-//             res = await createPost(null, text, null, user.id, user.token);
-
-//             // Check if 'res' is defined before accessing its properties
-//             if (res) {
-//                 // Handle the response as needed
-//             } else {
-//                 console.error("createPost response is undefined");
-//             }
-//         } catch (error) {
-//             console.error("Error in postSubmit:", error);
-//             // Handle the error as needed
-//         }
-//     } else {
-//         // Handle the case where 'user' or 'user.id' is undefined
-//         console.error("User or user.id is undefined");
-//     }
-
-//     setLoading(false);
-
-//     if (res === "ok") {
-//         setText("");
-//         setVisible(false);
-//     } else {
-//         setError(res);
-
-//         if (images && images.length) {
-//             // Handle the case when there are images
-//             setLoading(true);
-//             const postImages = images.map((img)=>{
-//               return postImages;
-//             })
-//             const path = `${user.username}/post Images`;
-//             let formData = new FormData();
-//             formData.append("path",path);
-//             postImages.forEach((image)=>{
-//               formData.append("file",image)
-
-//             });
-//             const response=await uploadImages(formData,path,user.token)
-//            await createPost(null,null,text,response,user.id,user.token)
-//            setLoading(false)
-//            setText("") ;
-//            setImages("") 
-//            setVisible(false)         
-//             console.log(response)
-//         } else if (text) {
-
-// setLoading(true)
-// const response = await createPost(null,text,null,user.id,user.token)
-
-// setLoading(false)
-// if(response === "ok"){
-//   setText("")
-//   setVisible(false)
-
-// }
-// else{
-//   setError(response)
-// }
-
-//             // Handle the case when there is text
-//             console.log("Text exists");
-//         } else {
-//             // Handle the case when there is neither text nor images
-//             console.log("Nothing");
-//         }
-//     }
-// };
 
 
 const postSubmit = async () => {
@@ -144,11 +67,12 @@ const postSubmit = async () => {
   setLoading(false);
 
   if (res === "ok") {
+    console.log("post created successfully")
     setText("");
     setVisible(false);
   } else {
     setError(res);
-
+console.log("error creating post",res)
     if (images && images.length) {
       setLoading(true);
       const path = `${user.username}/post Images`;
@@ -203,6 +127,7 @@ const postSubmit = async () => {
   
   return (
     <div className="blur">
+      
       <div className="postbox" ref={popup}>
         <div className="box_header">
         <div className="box_circle" onClick={handleClose}>
