@@ -57,13 +57,14 @@
 
 
 const express = require("express");
-const { register, login,activateAccount,googleAuthLogin} = require("../controllers/user");
+const { register, login,activateAccount,googleAuthLogin,getProfile} = require("../controllers/user");
 const router = express.Router();
 const passport = require("passport");
 
 router.post("/register", register);
 router.post("/login", login);
 router.post("/activate", activateAccount);
+router.get("/getProfile/:username" ,getProfile);
 
 router.get("/login/success", isAuthenticated, (req, res) => {
   res.status(200).json({

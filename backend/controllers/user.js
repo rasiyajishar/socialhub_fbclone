@@ -300,3 +300,15 @@ exports.googleAuthLogin=async(req,res)=>{
     console.log(error) 
   }
   }
+
+
+
+  exports.getProfile=async(req,res)=>{
+    try {
+     const {username} = req.params;
+    const profile = await User.find({username }).select("-password")
+    res.json(profile)
+} catch (error) {
+        return res.status(500).json({ message: "Internal server error" });   
+    }
+  }
