@@ -67,12 +67,11 @@ const postSubmit = async () => {
   setLoading(false);
 
   if (res === "ok") {
-    console.log("post created successfully")
-    setText("");
+   
     setVisible(false);
   } else {
     setError(res);
-console.log("error creating post",res)
+
     if (images && images.length) {
       setLoading(true);
       const path = `${user.username}/post Images`;
