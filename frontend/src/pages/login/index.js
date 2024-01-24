@@ -81,41 +81,43 @@ setLogin({...login,[name]:value})
 
 
 //handle social login
-const handleGoogleLogin=async()=>{
-  try {
-      const data = await signInWithPopup(auth, provider);
-const credential = GoogleAuthProvider.credentialFromResult(data);
-const user = data.user;
+// const handleGoogleLogin=async()=>{
+//   try {
+//       const data = await signInWithPopup(auth, provider);
+// const credential = GoogleAuthProvider.credentialFromResult(data);
+// const user = data.user;
 
-console.log("credential:",credential);
-console.log("user",user);
-try {
-  const response=await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/googleauth`, user)
-  // const response=await axios.post("http://localhost:8000/user/googleauth",user)
-  console.log(response,"hhhhhhhhhhhhhhh")
-  if(response.status==201||203){
-    alert.success("login successfull")
-    localStorage.setItem("jwt",response.data.data)
-    localStorage.setItem("UserEmail",response.data.userid.email)
-    localStorage.setItem("UserName",response.data.userid.username)
-    localStorage.setItem("UserId",response.data.userid._id)
-    navigate("/")
-  }
-} catch (error) {
- alert.error(error)
-}
-  } catch (error) {
-   alert(error)
-  }
-}
-
-
-
-// const googleAuth = ()=>{
-//   window.open(
-//     `${process.env.REACT_APP_BACKEND_URL}`,"_self"
-//   )
+// console.log("credential:",credential);
+// console.log("user",user);
+// try {
+//   const response=await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/googleauth`, user)
+//   // const response=await axios.post("http://localhost:8000/user/googleauth",user)
+//   console.log(response,"hhhhhhhhhhhhhhh")
+//   if(response.status==201||203){
+//     alert.success("login successfull")
+//     localStorage.setItem("jwt",response.data.data)
+//     localStorage.setItem("UserEmail",response.data.userid.email)
+//     localStorage.setItem("UserName",response.data.userid.username)
+//     localStorage.setItem("UserId",response.data.userid._id)
+//     navigate("/")
+//   }
+// } catch (error) {
+//  alert.error(error)
 // }
+//   } catch (error) {
+//    alert(error)
+//   }
+// }
+
+
+
+const googllogin = () => {
+  window.open(`${process.env.REACT_APP_BACKEND_URL}/auth/google`, "_self");
+};
+
+
+
+
 
 const loginValidation = yup.object({
     email: yup.string().required('Email is required').email('must be a valid email'),
@@ -231,7 +233,7 @@ const loginSubmit = async () => {
         <GoogleButton
                   className="w-100 mb-3"
                type="light" // can be light or dark
-               onClick={handleGoogleLogin}
+               onClick={googllogin}
                   />
       </div>
     </div>

@@ -74,7 +74,7 @@ const postSubmit = async () => {
 
     if (images && images.length) {
       setLoading(true);
-      const path = `${user.username}/post Images`;
+      const path = `${user.username}/postImages`;
       let formData = new FormData();
 
       // Map over the images correctly

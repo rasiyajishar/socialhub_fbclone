@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,useNavigate } from "react-router-dom";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
 import Home from "./pages/home";
@@ -8,45 +8,38 @@ import Register from "./pages/register";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import CreatePostPopup from "./components/createPostPop";
+import  {postsReducer} from "./functions/reducer";
 
-function reDucer(state, action) {
-  switch (action.type) {
-    case "POST_REQUEST":
-      return { ...state, loading: true, error: "" };
-    case "POST_SUCCESS":
-      console.log("API Response Data:", action.payload);
-      return {
-        ...state,
-        loading: false,
-        posts: action.payload,
-        error: ""
-      };
-    case "POST_ERROR":
-      return {
-        ...state,
-        loading: false,
-        error: action.payload
-      };
-    default:
-      return state;
-  }
-}
 
 function App() {
   const [visible, setVisible] = useState(false);
   const { user } = useSelector((state) => ({ ...state }));
-  const [{ loading, error, posts }, dispatch] = useReducer(reDucer, {
+  const [{ loading, error, posts }, dispatch] = useReducer(postsReducer, {
     loading: false,
     posts: [],
     error: ""
   });
 
+
+  const navigate = useNavigate(); 
+  
   useEffect(() => {
     console.log("User Object:", user);
     if (user && user.token) {
       getAllPosts();
     }
   }, [user]);
+  
+
+  // useEffect(() => {
+  //   if (!user || !user.token) {
+  //     console.log("Redirecting to login");
+  //     navigate("/login");
+  //   } else {
+  //     console.log("User authenticated, fetching posts");
+  //     getAllPosts();
+  //   }
+  // }, [user, navigate]);
   
 
   const getAllPosts = async () => {
@@ -96,6 +89,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} exact />
         <Route path="/profile" element={<Profile />} exact />
+        <Route path="/profile/:username" element={<Profile />} exact />
+
         <Route
           path="/"
           element={<Home setVisible={setVisible} posts={posts} />}
