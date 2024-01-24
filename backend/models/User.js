@@ -3,21 +3,24 @@ const mongoose = require("mongoose")
 
 
 const userSchema = mongoose.Schema({
+    googleId:{
+        type:String,
+    },
     first_name:{
         type:String,
-        required:[true,"firstname is requires"],
+        required:[true,"firstname is required"],
         trim:true,
         text:true,
     },
     last_name:{
         type:String,
-        required:[true,"lastname is required is requires"],
+        required:[true,"lastname is required is required"],
         trim:true,
         text:true,
     },
     username:{
         type:String,
-        required:[true,"username is requires"],
+        required:[true,"username is required"],
         trim:true,
         text:true,
         unique:true
@@ -47,7 +50,7 @@ gender:{
     type:String,
     required:[true,"gender is requires"],
     trim:true,
-   
+   default:"unknown",
 },
 byear:{
     type:Number,

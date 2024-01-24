@@ -93,12 +93,12 @@ router.get("/login/failed", (req, res) => {
 // router.get("/google", passport.authenticate("google", ["profile", "email"]));
 
 //googlefirebase-route
-router.post("/googleauth",googleAuthLogin)
+// router.post("/googleauth",googleAuthLogin)
 
-router.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect(process.env.BASE_URL);
-});
+// router.get("/logout", (req, res) => {
+//   req.logout();
+//   res.redirect(process.env.BASE_URL);
+// });
 
 // Middleware to check if the user is authenticated
 function isAuthenticated(req, res, next) {
