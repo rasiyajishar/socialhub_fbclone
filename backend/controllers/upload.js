@@ -1,5 +1,6 @@
 const cloudinary = require("cloudinary");
 const fs = require("fs");
+const { resolve } = require("path");
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUD_API_KEY,
@@ -25,7 +26,17 @@ exports.uploadImages = async (req, res) => {
 };
 
 exports.listImages = async(req,res)=>{
-    
+  const {path ,sort,max}=req.body;
+  cloudinary.v2.search
+  .expression (`${path}`)
+  .sort_by('createdAt',`${sort}`)
+  .max_results(max)
+  .execute()
+  .then((result)=>{
+  res.json(result)
+  }).catch((err)=>{
+    console.log(err.error.message)
+   } )
 }
 
 
