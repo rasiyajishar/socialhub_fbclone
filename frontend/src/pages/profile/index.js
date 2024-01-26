@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom'
+import {  useNavigate, useParams } from 'react-router-dom'
 import { useReducer } from 'react';
+
 import { profileReducer } from '../../functions/reducer';
+import {Header} from "../../components/header";
 import axios from 'axios';
 const Profile = () => {
 const{username}=useParams();
-
+const navigate=useNavigate()
 // const { user } = useSelector((state)=({ ...state }))
 // var userName = username === undefined ? user.username:username;
 
@@ -34,12 +36,21 @@ const getProfile= async()=>{
       `${process.env.REACT_APP_BACKEND_URL}/getProfile/${userName}`,
       {
         headers: {
-          Authorization: `Bearer ${user.token}`
-        }
+          Authorization: `Bearer ${user.token}`,
+        },
       }
     );
 
     console.log("API Response:", response);
+
+
+if(response.ok === false){
+  navigate("/profile")
+}else{
+
+}
+
+
 
     if (response && response.data) {
       dispatch({
@@ -69,7 +80,9 @@ const getProfile= async()=>{
 
 
   return (
-    <div>Profile</div>
+    <div>
+    <Header />
+    </div>
   )
 }
 

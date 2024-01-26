@@ -86,7 +86,7 @@ import Cookies from 'js-cookie';
 
 import SearchResult from './searchresult'
 
-export const Header = () => {
+export const Header = ({ page}) => {
   const { user } = useSelector((state) => ({ ...state.user }));
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
