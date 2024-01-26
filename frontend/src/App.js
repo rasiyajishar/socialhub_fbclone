@@ -87,12 +87,12 @@ function App() {
     <div>
       {visible && <CreatePostPopup user={user} setVisible={setVisible} />}
       <Routes>
-        <Route path="/login" element={<Login />} exact />
+        <Route path="/" element={<Login />} exact />
         <Route path="/profile" element={<Profile />} exact />
         <Route path="/profile/:username" element={<Profile />} exact />
 
         <Route
-          path="/"
+          path="/home"
           element={<Home setVisible={setVisible} posts={posts} />}
           exact
         />

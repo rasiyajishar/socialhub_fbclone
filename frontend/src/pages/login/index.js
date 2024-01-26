@@ -57,8 +57,7 @@ import axios from "axios";
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import * as yup from 'yup';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { provider,auth } from '../../firebaseapi/Firebaseapi';
+
 import GoogleButton from "react-google-button";
 const loginInfos = {
     email:"",
@@ -146,7 +145,7 @@ const loginSubmit = async () => {
     if (response.data) {
       const { message, ...rest } = response.data;
       dispatch({ type: "LOGIN", payload: rest });
-      navigate("/");
+      navigate("/home");
     } else {
       // Handle the case where response.data is undefined or not in the expected format
       console.error("Unexpected response format:", response);
