@@ -111,7 +111,9 @@ const postRoutes = require("./routes/post")
 const User=require('./models/User')
 app.use(cors());
 app.use(
+ 
   fileUpload({
+    origin:"http://localhost:3000",
     useTempFiles:true,
   })
 );
