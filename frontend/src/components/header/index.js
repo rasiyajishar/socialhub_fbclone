@@ -148,6 +148,7 @@ export const Header = ({ page}) => {
       <div className='header-center'>
         <Link to="/" className='nav-link'>
         <AiFillHome color='blue' />
+        
         </Link>
         <Link to="/friends" className='nav-link'>
           <FaUserFriends />

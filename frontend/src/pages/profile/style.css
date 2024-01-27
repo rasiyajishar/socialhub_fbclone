@@ -1,0 +1,60 @@
+.profile{
+    color:rgb(249, 249, 252);
+}
+
+.profiletop{
+   margin-top: 6px; 
+   box-shadow: 0 1px 2px  rgb(157, 157, 184);
+   background:rgb(249, 248, 250)
+}
+.profilecontainer{
+    max-width: 945px;
+    margin:0 auto;
+   
+}
+.profilecover{
+    position:relative;
+    height: 350px;
+    width:100%;
+   border-bottom-left-radius: 8px;
+   border-bottom-right-radius: 8px;
+   background-color: rgb(157, 157, 184);
+}
+.updatecover_wrapper{
+position:absolute;
+bottom :1rem;
+right: 1rem;
+}
+.opencover_update{
+    background: #fff;
+    padding: 7px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: black;
+    border-radius: 10px;
+    cursor: pointer;
+    
+}
+.opencover_menu{
+    background: #fff;
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px color(srgb red green blue);
+color:black;
+}
+.opencovermenu_item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius:10px;
+
+}
