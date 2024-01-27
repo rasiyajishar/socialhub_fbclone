@@ -146,7 +146,7 @@ export const Header = ({ page}) => {
         {searchResults.length > 0 && <SearchResult results={searchResults} />}
       </div>
       <div className='header-center'>
-        <Link to="/" className='nav-link'>
+        <Link to="/home" className='nav-link'>
         <AiFillHome color='blue' />
         
         </Link>
