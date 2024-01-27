@@ -228,12 +228,13 @@ const loginSubmit = async () => {
           </div>
         </div>
         {/* <button className='googlebtn' onClick={googleAuth}><span>Sign in with google</span></button> */}
-       
+       <div className='googlelogin'>
         <GoogleButton
                   className="w-100 mb-3"
                type="light" // can be light or dark
                onClick={googllogin}
                   />
+                  </div>
       </div>
     </div>
   );
