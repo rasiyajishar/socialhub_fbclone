@@ -7,11 +7,11 @@ function Peopleyoumayknw() {
     <div className="peopleyoumayknw">
       <div className="peopleyoumayknw_header">
         People you may know
-        <div className="post_header_right ppl_circle">
+        <div className="post_header_right ppl_circle hover1">
           <HiDotsHorizontal />
         </div>
       </div>
-      
+
       <div className="peopleymknow_list">
         {stories.map((item, i) => (
           <Addfriendsmallcard key={i} item={item} />

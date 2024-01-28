@@ -8,7 +8,7 @@ function Addfriendsmallcard({item}) {
         <div className='addfriend_infos'>
 
 <div className='addfriend_name'>{item.profile_name}</div>
-<div className='light_blur_btn'>
+<div className='addfriend_btn'>
     Add friend
 </div>
         </div>
