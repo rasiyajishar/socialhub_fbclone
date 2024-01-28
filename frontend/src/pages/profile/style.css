@@ -86,4 +86,20 @@ color:black;
  background-repeat: no-repeat;
  border: 2px solid white;
  background: white;
+ cursor: pointer;
+}
+.profile_w_bg:hover{
+filter: brightness(95%);
+}
+.profile_circle{
+    position: absolute;
+    bottom: 4.5rem;
+    right: .55rem;
+    /* background: rgb(166, 162, 224); */
+    background-color: rgb(227, 227, 233);
+    color: black;
+width: 30px;
+height: 30px;
+border-radius: 50%;
+cursor: pointer;
 }

@@ -12,11 +12,11 @@ const Profile = () => {
   const { username } = useParams();
   const navigate = useNavigate();
  
-  // const { user } = useSelector((state)=({ ...state }))
-  // var userName = username === undefined ? user.username:username;
+  const { user } = useSelector((state)=>({ ...state }))
+  var userName = username === undefined ? user.username:username;
 
-  const user = useSelector((state) => state);
-  const userName = username === undefined ? user?.username : username;
+  // const user = useSelector((state) => state);
+  // const userName = username === undefined ? user?.username : username;
 
   const [{ loading, error, profile }, dispatch] = useReducer(profileReducer, {
     loading: false,
@@ -34,7 +34,7 @@ const Profile = () => {
       dispatch({ type: "PROFILE_REQUEST" });
       console.log("User:", user);
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/getProfile/${userName}`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/getProfile/${userName}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
