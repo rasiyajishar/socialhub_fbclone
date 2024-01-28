@@ -1,9 +1,10 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { FaCamera } from "react-icons/fa";
 import { MdInsertPhoto } from "react-icons/md";
 import { FaFileUpload } from "react-icons/fa";
 
-function Cover({cover,showcovermenu, setShowCovermenu}) {
+function Cover({cover}) {
+  const [showcovermenu, setShowCovermenu] = useState(false);
   return (
     <div className="profilecover">
     {cover && (

@@ -7,10 +7,11 @@ import { profileReducer } from "../../functions/reducer";
 import { Header } from "../../components/header";
 import axios from "axios";
 import Cover from "./Cover"
+import Profilepictureinfos from "./Profilepictureinfos";
 const Profile = () => {
   const { username } = useParams();
   const navigate = useNavigate();
-  const [showcovermenu, setShowCovermenu] = useState(true);
+ 
   // const { user } = useSelector((state)=({ ...state }))
   // var userName = username === undefined ? user.username:username;
 
@@ -79,9 +80,9 @@ const Profile = () => {
         <div className="profilecontainer">
          <Cover 
          cover ={profile.cover}
-         showcovermenu = {showcovermenu}
-         setShowCovermenu={setShowCovermenu}
+        
          />
+         <Profilepictureinfos profile={profile}/>
         </div>
       </div>
     </div>
