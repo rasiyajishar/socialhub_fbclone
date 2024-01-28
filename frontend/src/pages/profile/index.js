@@ -8,6 +8,8 @@ import { Header } from "../../components/header";
 import axios from "axios";
 import Cover from "./Cover"
 import Profilepictureinfos from "./Profilepictureinfos";
+import Profilemenu from "./Profilemenu";
+import Peopleyoumayknw from "./Peopleyoumayknw";
 const Profile = () => {
   const { username } = useParams();
   const navigate = useNavigate();
@@ -83,6 +85,14 @@ const Profile = () => {
         
          />
          <Profilepictureinfos profile={profile}/>
+         <Profilemenu />
+        </div>
+      </div>
+      <div className="profile_bottom">
+        <div className="profile_container">
+          <div className="bottom_container">
+            <Peopleyoumayknw />
+          </div>
         </div>
       </div>
     </div>
