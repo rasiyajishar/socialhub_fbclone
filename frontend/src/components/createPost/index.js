@@ -49,8 +49,10 @@ import { FaVideo } from "react-icons/fa";
 import { MdInsertPhoto } from "react-icons/md";
 import { PiSmileyFill } from "react-icons/pi";
 import CreatePostPopup from "../createPostPop";
+import { useSelector } from "react-redux";
 
-const CreatePost = ({ user, visible, setVisible }) => {
+
+const CreatePost = ({ user, visible, setVisible  }) => {
   return (
     <div className="CreatePost">
       <div className="CreatePost_header">
@@ -77,7 +79,7 @@ const CreatePost = ({ user, visible, setVisible }) => {
         </div>
       </div>
 
-      {visible && <CreatePostPopup user={user} setVisible={setVisible} />}
+      {visible && <CreatePostPopup user={user} setVisible={setVisible}  />}
     </div>
   );
 };

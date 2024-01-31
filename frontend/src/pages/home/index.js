@@ -39,28 +39,33 @@ import Lefthome from '../../components/home/left';
 import CreatePost from '../../components/createPost';
 import CreatePostPopup from '../../components/createPostPop';
 import { useSelector } from 'react-redux';
-import Post from "../../components/post"
-const Home = ({ visible, setVisible, posts ,loading}) => {
-  
+import Post from "../../components/post";
+import './style.css';
+const Home = ({ visible, setVisible, posts, loading }) => {
+
   console.log("Posts before rendering:", posts);
-  
+
   const { user } = useSelector((state) => ({ user: state.user }));
 
   return (
-    <div>
-      <Header />
-      <Lefthome user={user} />
+    <div className='homecss'>
+      <div>
+        <Header />
+      </div>
+      <div>
+        <Lefthome user={user} />
+      </div>
       <CreatePost user={user} setVisible={setVisible} />
 
       {loading ? (
-  <div>Loading...</div>
-) : (
-  <div className='posts'>
-    {posts.map((post) => (
-      <Post key={post._id} post={post} user={user} />
-    ))}
-  </div>
-)}
+        <div>Loading...</div>
+      ) : (
+        <div className='posts'>
+          {posts.map((post) => (
+            <Post key={post._id} post={post} user={user} />
+          ))}
+        </div>
+      )}
 
 
       {visible && <CreatePostPopup user={user} setVisible={setVisible} />}

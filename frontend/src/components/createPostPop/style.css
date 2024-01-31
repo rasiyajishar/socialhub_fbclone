@@ -27,16 +27,16 @@
 
   .postbox {
     min-height: 300px;
-    width: 70%; /* Adjust the width as needed */
+    width: 70%; 
     border-radius: 15px;
     background-color: white;
-    margin-left: 15%; /* Adjust the margin as needed */
+    margin-left: 350px; 
 }
 
 @media (max-width: 768px) {
     .postbox {
-        width: 90%; /* Adjust the width for smaller screens */
-        margin-left: 5%; /* Adjust the margin for smaller screens */
+        width: 90%; 
+        margin-left: 5%; 
     }
 }
 

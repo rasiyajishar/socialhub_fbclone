@@ -90,10 +90,11 @@ const Profile = () => {
       </div>
       <div className="profile_bottom">
         <div className="profile_container">
-          <div className="bottom_container">
+          
+        </div>
+        <div className="bottom_container">
             <Peopleyoumayknw />
           </div>
-        </div>
       </div>
     </div>
   );

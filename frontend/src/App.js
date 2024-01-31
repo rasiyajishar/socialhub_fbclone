@@ -42,7 +42,7 @@ function App() {
   // }, [user, navigate]);
   
 
-  const getAllPosts = async () => {
+   const getAllPosts = async () => {
     try {
       dispatch({ type: "POST_REQUEST" });
       console.log("User:", user);
@@ -83,9 +83,13 @@ function App() {
 
   console.log(posts);
 
+  const updatePosts = () => {
+    getAllPosts(); // Fetch the updated list of posts
+  };
+
   return (
     <div>
-      {visible && <CreatePostPopup user={user} setVisible={setVisible} />}
+      {visible && <CreatePostPopup user={user} setVisible={setVisible} updatePosts={updatePosts} />}
       <Routes>
         <Route path="/" element={<Login />} exact />
         <Route path="/profile" element={<Profile />} exact />

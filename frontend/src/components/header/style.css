@@ -5,7 +5,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #333; 
+    background-color: #e26767; 
+   
     color: #fff; 
    
   }
@@ -36,6 +37,7 @@
   
   .header-center {
     display: flex;
+    justify-content: space-between;
   }
   
   .nav-link {

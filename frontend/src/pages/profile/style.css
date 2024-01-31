@@ -169,7 +169,7 @@ color:rgb(37, 33, 33)
 .addfriend_btn{
     border:none;
     outline:none;
-    background-color: rgb(159, 159, 224);
+    background-color: rgb(143, 143, 224);
     padding: 8.5px 12px;
     border-radius: 7px;
     font-weight: 600;
@@ -204,7 +204,7 @@ color: rgb(240, 238, 241);
     width:100%;
     height:100%;
     border-radius: 10px;
-    border:3px solid rgb(89, 89, 248);
+    border:3px solid rgb(98, 98, 247);
     padding: 10px 15px;
 }
 
@@ -225,7 +225,7 @@ color: rgb(240, 238, 241);
   width: 150px;
   border-radius: 10px;
   overflow: hidden;
-  background: black;
+  background: rgb(24, 23, 23);
 
 }
 
@@ -248,11 +248,7 @@ color: rgb(240, 238, 241);
 
 }
 .addfriend_name{
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
 
-}
-
-.peopleyoumayknw{
-    display: none;
 }

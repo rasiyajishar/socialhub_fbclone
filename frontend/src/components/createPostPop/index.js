@@ -10,7 +10,7 @@ import { createPost } from '../../functions/post';
 import  PulseLoader from "react-spinners/PulseLoader"
 import { uploadImages } from '../../functions/uploadImages';
 
-function CreatePostPopup({ user, setVisible }) {
+function CreatePostPopup({ user, setVisible,updatePosts }) {
   const popup=useRef(null)
   const [text, setText] = useState('');
   const [showprev, setShowPrev] = useState(false);
@@ -38,90 +38,115 @@ function CreatePostPopup({ user, setVisible }) {
 
 
 
+// const postSubmit = async () => {
+//   setLoading(true);
+
+//   let res;
+
+//   if (user && user.id) {
+//     try {
+//       console.log("Token:", user.token);
+
+
+//       console.log('Request Payload:', { type: null, text, images, user: user.id });
+//       res = await createPost(null, text, images, user.id, user.token);
+
+
+//       console.log('API Response:', res); 
+
+//       if (!res) {
+//         console.error("createPost response is undefined");
+//       }
+//     } catch (error) {
+//       console.error("Error in postSubmit:", error);
+//     }
+//   } else {
+//     console.error("User or user.id is undefined");
+//   }
+
+//   setLoading(false);
+
+//   if (res === "ok") {
+//    updatePosts();
+//      setVisible(false);
+     
+//   } else {
+//     setError(res);
+
+//     if (images && images.length) {
+//       setLoading(true);
+//       const path = `${user.username}/postImages`;
+//       let formData = new FormData();
+
+      
+//       images.forEach((image) => {
+//         formData.append("file", image);
+//       });
+
+//       formData.append("path", path);
+
+//       try {
+//         const response = await uploadImages(formData, path, user.token);
+//         // Assuming that response contains the image URLs
+//         const imageUrls = response.map((image) => image.url);
+
+//         await createPost(null, text, imageUrls, user.id, user.token);
+//         setLoading(false);
+//         setText();
+        
+//         setImages([]);
+//         setVisible(false);
+       
+//         console.log(response);
+//       } catch (uploadError) {
+//         console.error("Error uploading images:", uploadError);
+//         setLoading(false);
+       
+//       }
+//     } else if (text) {
+//       setLoading(true);
+
+//       const response = await createPost(null, text, null, user.id, user.token);
+
+//       setLoading(false);
+
+//       if (response === "ok") {
+//         setText("");
+//         updatePosts();
+//         setVisible(false);
+//       } else {
+//         setError(response);
+//       }
+
+//       console.log("Text exists");
+//     } else {
+//       console.log("Nothing");
+//     }
+//   }
+// };
+
 const postSubmit = async () => {
   setLoading(true);
 
-  let res;
+  try {
+    const res = await createPost(null, text, images, user.id, user.token);
 
-  if (user && user.id) {
-    try {
-      console.log("Token:", user.token);
+    console.log('API Response:', res);
 
-
-      console.log('Request Payload:', { type: null, text, images, user: user.id });
-      res = await createPost(null, text, images, user.id, user.token);
-
-
-      console.log('API Response:', res); // Log the API response
-
-      if (!res) {
-        console.error("createPost response is undefined");
-      }
-    } catch (error) {
-      console.error("Error in postSubmit:", error);
+    if (res === 'ok') {
+      // Call the updatePosts function passed from App.js to update the list of posts
+      updatePosts();
+      setVisible(false);
+    } else {
+      setError(res);
     }
-  } else {
-    console.error("User or user.id is undefined");
+  } catch (error) {
+    console.error('Error in postSubmit:', error);
+    setError('Error occurred while creating the post');
   }
 
   setLoading(false);
-
-  if (res === "ok") {
-   
-    setVisible(false);
-  } else {
-    setError(res);
-
-    if (images && images.length) {
-      setLoading(true);
-      const path = `${user.username}/postImages`;
-      let formData = new FormData();
-
-      // Map over the images correctly
-      images.forEach((image) => {
-        formData.append("file", image);
-      });
-
-      formData.append("path", path);
-
-      try {
-        const response = await uploadImages(formData, path, user.token);
-        // Assuming that response contains the image URLs
-        const imageUrls = response.map((image) => image.url);
-
-        await createPost(null, text, imageUrls, user.id, user.token);
-        setLoading(false);
-        setText("");
-        // Clear the images array
-        setImages([]);
-        setVisible(false);
-        console.log(response);
-      } catch (uploadError) {
-        console.error("Error uploading images:", uploadError);
-        setLoading(false);
-        // Handle the upload error as needed
-      }
-    } else if (text) {
-      setLoading(true);
-
-      const response = await createPost(null, text, null, user.id, user.token);
-
-      setLoading(false);
-
-      if (response === "ok") {
-        setText("");
-        setVisible(false);
-      } else {
-        setError(response);
-      }
-
-      console.log("Text exists");
-    } else {
-      console.log("Nothing");
-    }
-  }
 };
-
 
   
   return (
